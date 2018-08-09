@@ -1,4 +1,8 @@
 use std::io::{self, BufRead};
+use std::thread;
+use std::sync::mpsc;
+
+mod compute;
 
 fn main() {
   let stdin = io::stdin();
@@ -10,6 +14,18 @@ fn main() {
 
   println!("{:?}", numbers);
   println!("{:?}", target);
+
+  compute::something();
+
+  let (tx, rx) = mpsc::channel();
+
+  thread::spawn(move || {
+    compute::transmit(mpsc::Sender::clone(&tx));
+  });
+
+  for received in rx {
+    println!("Got: {}", received);
+  }
 
   println!("(1)")
 }
