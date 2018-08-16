@@ -19,15 +19,20 @@ fn main() {
 
   let (tx, rx) = mpsc::channel();
 
+  let tx1 = mpsc::Sender::clone(&tx);
   thread::spawn(move || {
-    compute::transmit(mpsc::Sender::clone(&tx));
+    compute::transmit(tx1, 1);
+  });
+
+  thread::spawn(move || {
+    compute::transmit(tx, 2);
   });
 
   for received in rx {
     println!("Got: {}", received);
   }
 
-  println!("(1)")
+  println!("hung up")
 }
 
 fn parse_numbers(numbers: &str) -> std::vec::Vec<u32> {

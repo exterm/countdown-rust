@@ -1,5 +1,3 @@
-use std::thread;
-use std::time::Duration;
 use std::sync::mpsc;
 
 pub fn something() -> i32 {
@@ -7,16 +5,15 @@ pub fn something() -> i32 {
   return 0;
 }
 
-pub fn transmit(tx: mpsc::Sender<String>) {
+pub fn transmit(tx: mpsc::Sender<String>, n: i32) {
   let vals = vec![
-    String::from("hi"),
-    String::from("from"),
-    String::from("the"),
-    String::from("thread"),
+    format!("{}: hi", n),
+    format!("{}: from", n),
+    format!("{}: the", n),
+    format!("{}: thread", n),
   ];
 
   for val in vals {
     tx.send(val).unwrap();
-    thread::sleep(Duration::from_secs(1));
   }
 }
