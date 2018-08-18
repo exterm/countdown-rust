@@ -36,10 +36,10 @@ fn main() {
   println!("hung up")
 }
 
-fn parse_numbers(numbers: &str) -> std::vec::Vec<u32> {
+fn parse_numbers(numbers: &str) -> std::vec::Vec<i32> {
   let elements: Vec<&str> = numbers.trim_matches(|p| p == '[' || p == ']' )
                                    .split(",")
                                    .collect();
 
-    elements.iter().map(|e| e.parse::<u32>().unwrap()).collect()
+    elements.iter().map(|e| e.parse::<i32>().unwrap()).collect()
 }
