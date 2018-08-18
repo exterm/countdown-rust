@@ -2,6 +2,9 @@ use std::io::{self, BufRead};
 use std::thread;
 use std::sync::mpsc;
 
+#[macro_use]
+extern crate im;
+
 mod compute;
 
 fn main() {
@@ -14,8 +17,6 @@ fn main() {
 
   println!("{:?}", numbers);
   println!("{:?}", target);
-
-  compute::something();
 
   let (tx, rx) = mpsc::channel();
 

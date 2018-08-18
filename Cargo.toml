@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Philip Müller <mail@philip.in-aachen.net>"]
 
 [dependencies]
+im = "^11.0.1"
