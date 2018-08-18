@@ -12,6 +12,7 @@ clean:
 	@cargo clean
 
 test:
+	cargo test
 	@(echo "[1,1,2,3,5,8]"; echo 42; cat) | \
 	cargo run --release --quiet
 
